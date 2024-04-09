@@ -1,0 +1,5 @@
+D:\c# uni\laguerrtests\obj\Debug\net8.0\laguerrtests.csproj.AssemblyReference.cache
+D:\c# uni\laguerrtests\obj\Debug\net8.0\laguerrtests.GeneratedMSBuildEditorConfig.editorconfig
+D:\c# uni\laguerrtests\obj\Debug\net8.0\laguerrtests.AssemblyInfoInputs.cache
+D:\c# uni\laguerrtests\obj\Debug\net8.0\laguerrtests.AssemblyInfo.cs
+D:\c# uni\laguerrtests\obj\Debug\net8.0\laguerrtests.csproj.CoreCompileInputs.cache
