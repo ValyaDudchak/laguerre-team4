@@ -175,7 +175,7 @@ public class Laguerre
     }
 }
 
-class Experiment
+public class Experiment
 {
     private Laguerre _laguerre;
 
@@ -219,7 +219,7 @@ class Experiment
     }
 }
 
-public class LaguerreTests
+/*public class LaguerreTests
 {
     [Theory]
     [InlineData(2, 4)]
@@ -303,5 +303,65 @@ public class IntegralConstructorTests
         Assert.Equal(expectedA, integral.A);
         Assert.Equal(expectedB, integral.B);
         Assert.Equal(expectedE, integral.E);
+    }
+}*/
+public class LaguerreTests : IClassFixture<TestData>
+{
+    private readonly TestData _fixture;
+
+    public LaguerreTests(TestData fixture)
+    {
+        _fixture = fixture;
+    }
+
+    [Theory]
+    [InlineData(2, 4)]
+    public void LaguerreFunction_Returns_CorrectResult(double beta, double sigma)
+    {
+        Laguerre laguerre = new Laguerre(beta, sigma);
+
+        Assert.Equal(2,2, Math.Round(laguerre.LaguerreFunction(0, 0), 1));
+        Assert.Equal(1.06, Math.Round(laguerre.LaguerreFunction(1, 3), 2));
+    }
+}
+
+public class ExperimentTests : IClassFixture<TestData>
+{
+    private readonly TestData fixture;
+
+    public ExperimentTests(TestData fixture)
+    {
+        this.fixture = fixture;
+    }
+
+    [Fact]
+    public void Experiment_Returns_Result()
+    {
+        Experiment exp = fixture.ExperimentInstance;
+
+        var result = exp.RunExperiment(100);
+
+        Assert.NotNull(result);
+        Assert.IsType<Tuple<List<double>, double>>(result);
+    }
+}
+
+public class IntegralTests : IClassFixture<TestData>
+{
+    private readonly TestData _fixture;
+
+    public IntegralTests(TestData fixture)
+    {
+        _fixture = fixture;
+    }
+
+    [Fact]
+    public void RectangleIntegral_Returns_CorrectResult()
+    {
+        Integral integral = _fixture.IntegralInstance;
+
+        double result = integral.RectangleIntegral(x => x * x);
+
+        Assert.Equal(2.3, result, 1);
     }
 }
