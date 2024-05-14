@@ -13,9 +13,9 @@ namespace Laguerr
 
         public Integral(double a, double b, double e)
         {
-            this.A = a;
-            this.B = b;
-            this.E = e;
+            A = a;
+            B = b;
+            E = e;
         }
 
         public double A
@@ -248,6 +248,11 @@ namespace Laguerr
                 }
             }
 
+            public static double CustomFV(double t)
+            {
+                return Math.Pow(t, 3) * Math.Cos(t);
+            }
+
             public static Func<double, double> Gauss(double mu, double lambda)
             {
                 if (lambda <= 0)
@@ -282,13 +287,15 @@ namespace Laguerr
 
                     Func<double, double> f = Function.F;
 
-                    var transformed = laguerre.TransformLaguerre(f, maxT, 20);
+                    Func<double, double> customFV = Function.CustomFV;
+
+                    var transformed = laguerre.TransformLaguerre(customFV, maxT, 20);
 
                     Console.WriteLine("Transformed Laguerre:");
-                        for (int i = 0; i < transformed.Count; i++)
-                        {
-                            Console.WriteLine($"N = {i}, Value = {transformed[i]}");
-                        }
+                    for (int i = 0; i < transformed.Count; i++)
+                    {
+                        Console.WriteLine($"N = {i}, Value = {transformed[i]}");
+                    }
 
 
                     Console.WriteLine("Reversed Transform Laguerre:");
@@ -299,13 +306,13 @@ namespace Laguerr
                     Console.WriteLine("Tabulate Laguerre:");
                     List<double> tabulated = laguerre.TabulateLaguerre(maxT, 5); 
 
-                        Console.WriteLine("Tabulate Laguerre:");
-                        for (int i = 0; i < tabulated.Count; i++)
-                        {
-                            Console.WriteLine($"T = {i * 0.1}, Value = {tabulated[i]}");
-                        }
+                    Console.WriteLine("Tabulate Laguerre:");
+                    for (int i = 0; i < tabulated.Count; i++)
+                    {
+                        Console.WriteLine($"T = {i * 0.1}, Value = {tabulated[i]}");
+                    }
 
-                        Func<double, double> gaussFunc = Function.Gauss(5, 6);
+                    Func<double, double> gaussFunc = Function.Gauss(5, 6);
 
                     double gaussOutput = gaussFunc(maxT);
                     Console.WriteLine($"Gauss method output for T = {maxT}: {gaussOutput}");
