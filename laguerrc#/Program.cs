@@ -151,21 +151,33 @@ namespace Laguerr
             return results;
         }
 
+        /* public List<double> TransformLaguerre(Func<double, double> f, double T, int N)
+         {
+             List<double> ns = Enumerable.Range(0, N + 1).Select(x => (double)x).ToList();
+             List<double> results = new List<double>();
+
+             foreach (var i in ns)
+             {
+                 Func<double, double> func = (double x) => f(x) * LaguerreFunction(x, (int)i) * Math.Exp(-(this.Sigma - this.Beta) * x);
+                 results.Add(new Integral(0, T, 0.0001).RectangleIntegral(func));
+             }
+
+             return results;
+         }*/
         public List<double> TransformLaguerre(Func<double, double> f, double T, int N)
         {
-            List<double> ns = Enumerable.Range(0, N + 1).Select(x => (double)x).ToList();
             List<double> results = new List<double>();
 
-            foreach (var i in ns)
+            for (int i = 0; i <= N; i++)
             {
-                Func<double, double> func = (double x) => f(x) * LaguerreFunction(x, (int)i) * Math.Exp(-(this.Sigma - this.Beta) * x);
+                Func<double, double> func = x => f(x) * LaguerreFunction(x, i) * Math.Exp(-(Sigma - Beta) * x);
                 results.Add(new Integral(0, T, 0.0001).RectangleIntegral(func));
             }
 
             return results;
         }
 
-        public double ReversedTransformLaguerre(List<double> seq, double t)
+        /*public double ReversedTransformLaguerre(List<double> seq, double t)
         {
             double sumRes = 0;
 
@@ -175,11 +187,97 @@ namespace Laguerr
             }
 
             return sumRes;
+        }*/
+        public double ReversedTransformLaguerre(List<double> hList, double t)
+        {
+            double resultSum = 0;
+            List<double> hListNew = hList.FindAll(x => x != 0);
+            for (int i = 0; i < hListNew.Count; i++)
+            {
+                resultSum += hListNew[i] * LaguerreFunction(t, i);
+            }
+
+            return resultSum;
         }
+        public List<double> ReversedTransformLaguerre(List<double> hList, double t1, double t2)
+        {
+            List<double> result = new List<double>() { };
+            int size = 1000;
+            double step = (t2 - t1) / size;
+            for (int i = 0; i < size + 1; i++)
+            {
+                double t = t1 + i * step;
+
+                result.Add(ReversedTransformLaguerre(hList, t));
+            }
+
+            return result;
+        }
+    }
+
+
+    public class Experiment
+    {
+        private Laguerre _laguerre;
+
+        public Experiment(Laguerre laguerre)
+        {
+            this.Laguerre = laguerre;
+        }
+
+        public Laguerre Laguerre
+        {
+            get { return _laguerre; }
+            set
+            {
+                if (value == null)
+                    throw new ArgumentNullException("laguerre cannot be null");
+                _laguerre = value;
+            }
+        }
+
+        public Tuple<List<double>, double> RunExperiment(double T, int N = 20, double eps = 0.001)
+        {
+            List<double> t = Enumerable.Range(0, 1001).Select(x => T * x / 1000).ToList();
+            foreach (var i in t)
+            {
+                bool check = true;
+                for (int n = 0; n <= N; n++)
+                {
+                    if (Math.Abs(Laguerre.LaguerreFunction(i, n)) >= eps)
+                    {
+                        check = false;
+                        break;
+                    }
+                }
+                if (check)
+                {
+                    List<double> ns = Enumerable.Range(0, N + 1).Select(x => (double)x).ToList();
+                    return Tuple.Create(ns, i);
+                }
+            }
+            return null;
+        }
+    }
+
+    public class Functions
+    {
+        public static double F(double t)
+        {
+            if (t >= 0 && t <= 2 * Math.PI)
+            {
+                return Math.Sin(t - Math.PI / 2) + 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
         public static Func<double, double> Gauss(double mu, double lambda)
         {
             if (lambda <= 0)
-                throw new ArgumentException("Lambda is > 0");
+                throw new ArgumentException("lambda must be greater than 0");
 
             return t =>
             {
@@ -189,130 +287,76 @@ namespace Laguerr
                 return Math.Exp(exp) / denom;
             };
         }
-
-        public class Experiment
-        {
-            private Laguerre _laguerre;
-
-            public Experiment(Laguerre laguerre)
-            {
-                this.Laguerre = laguerre;
-            }
-
-            public Laguerre Laguerre
-            {
-                get { return _laguerre; }
-                set
-                {
-                    if (value == null)
-                        throw new ArgumentNullException("laguerre cannot be null");
-                    _laguerre = value;
-                }
-            }
-
-            public Tuple<List<double>, double> RunExperiment(double T, int N = 20, double eps = 0.001)
-            {
-                List<double> t = Enumerable.Range(0, 1001).Select(x => T * x / 1000).ToList();
-                foreach (var i in t)
-                {
-                    bool check = true;
-                    for (int n = 0; n <= N; n++)
-                    {
-                        if (Math.Abs(Laguerre.LaguerreFunction(i, n)) >= eps)
-                        {
-                            check = false;
-                            break;
-                        }
-                    }
-                    if (check)
-                    {
-                        List<double> ns = Enumerable.Range(0, N + 1).Select(x => (double)x).ToList();
-                        return Tuple.Create(ns, i);
-                    }
-                }
-                return null;
-            }
-        }
-
-        public class Function
-        {
-            public static double F(double t)
-            {
-                if (t >= 0 && t <= 2 * Math.PI)
-                {
-                    return Math.Sin(t - Math.PI / 2) + 1;
-                }
-                else
-                {
-                    return 0;
-                }
-            }
-
-            public static Func<double, double> Gauss(double mu, double lambda)
-            {
-                if (lambda <= 0)
-                    throw new ArgumentException("lambda must be greater than 0");
-
-                return t =>
-                {
-                    double exponent = -Math.Pow((t - mu), 2) / (2 * Math.Pow(lambda, 2));
-                    double denominator = lambda * Math.Sqrt(2 * Math.PI);
-
-                    return Math.Exp(exponent) / denominator;
-                };
-            }
         class Program
         {
+
             static void Main(string[] args)
             {
                 double beta = 2;
                 double sigma = 4;
+                double T = 100;
+                int N = 20;
+                double eps = 0.001;
 
                 Laguerre laguerre = new Laguerre(beta, sigma);
-                Laguerre.Experiment exp = new Laguerre.Experiment(laguerre);
+                Experiment exp = new Experiment(laguerre);
 
-                var experimentResult = exp.RunExperiment(100);
+                var result = exp.RunExperiment(T, N, eps);
 
-                if (experimentResult != null)
+                if (result != null)
                 {
-                    double maxT = experimentResult.Item2;
+                    List<double> ns = result.Item1;
+                    double ans = result.Item2;
 
-                    Console.WriteLine($"Laguerre parameters: Beta = {laguerre.Beta}, Sigma = {laguerre.Sigma}");
-                    Console.WriteLine($"Max value T = {maxT}");
-
-                    Func<double, double> f = Function.F;
-
-                    var transformed = laguerre.TransformLaguerre(f, maxT, 20);
-
-                    Console.WriteLine("Transformed Laguerre:");
-                        for (int i = 0; i < transformed.Count; i++)
-                        {
-                            Console.WriteLine($"N = {i}, Value = {transformed[i]}");
-                        }
-
-
-                    Console.WriteLine("Reversed Transform Laguerre:");
-                    double t = maxT / 2; 
-                    double reversedTransform = laguerre.ReversedTransformLaguerre(transformed, t);
-                    Console.WriteLine($"Reversed Transform Laguerre at t = {t}: {reversedTransform}");
-
-                    Console.WriteLine("Tabulate Laguerre:");
-                    List<double> tabulated = laguerre.TabulateLaguerre(maxT, 5); 
-
-                        Console.WriteLine("Tabulate Laguerre:");
-                        for (int i = 0; i < tabulated.Count; i++)
-                        {
-                            Console.WriteLine($"T = {i * 0.1}, Value = {tabulated[i]}");
-                        }
-
-                        Func<double, double> gaussFunc = Function.Gauss(5, 6);
-
-                    double gaussOutput = gaussFunc(maxT);
-                    Console.WriteLine($"Gauss method output for T = {maxT}: {gaussOutput}");
-
+                    var transformed = laguerre.TransformLaguerre(Functions.F, ans, N);
                     WriteToCsv(transformed, "transformed_laguerre.csv");
+
+                    List<double> tabulated = laguerre.TabulateLaguerre(ans, 5);
                     WriteToCsv(tabulated, "tabulated_laguerre.csv");
-                    WriteToCsv(new List<double> { gaussOutput }, "gauss_output.csv");
+
+                    // List<double> reversed = new List<double>();
+                    int t = 2;
+                   
+                    var rtransformed = laguerre.ReversedTransformLaguerre(transformed, t);
+                    WriteToCsv(new List<double> { rtransformed }, "rtransformed_laguerre.csv");
+
+
+                    /*List<double> reversed1 = new List<double>();
+
+                    for (int i = 0; i < 20; i++)
+                    {
+                        reversed1.Add(i);
+                    }
+
+                    double t = 2;
+                    List<double> reversedTransform = laguerre.ReversedTransformLaguerrens(, N);
+                    WriteToCsv(reversedTransform, "reversedlaguerre.csv");*/
+
+                    Func<double, double> gaussFunc = Functions.Gauss(7, 9);
+                    List<double> gaussTabulated = laguerre.TransformLaguerre(gaussFunc, T, N);
+                    WriteToCsv(gaussTabulated, "gauss_tabulated.csv");
+
+                    Func<double, double> gaussFunc3 = Functions.Gauss(3, 3);
+                    List<double> gaussTabulated3 = laguerre.TransformLaguerre(gaussFunc3, T, N);
+                    WriteToCsv(gaussTabulated3, "gauss_tabulated_3_lambda.csv");
+
+                    Func<double, double> gaussFunc5 = Functions.Gauss(6, 5);
+                    List<double> gaussTabulated5 = laguerre.TransformLaguerre(gaussFunc5, T, N);
+                    WriteToCsv(gaussTabulated5, "gauss_tabulated_5_lambda.csv");
+
+
+                    //
+                    Console.WriteLine("\nExperiment mu = 3*lambda");
+                    double lambda_1 = 5;
+                    var Gaus_transform_tabulate_exp_3 = laguerre.TransformLaguerre(Functions.Gauss(3 * lambda_1, lambda_1), T, N);
+                    WriteToCsv(Gaus_transform_tabulate_exp_3, "transformedgausstabulated_3.csv");
+
+                    Console.WriteLine("\nExperiment mu = 6*lambda");
+                    double lambda_2 = 3;
+                    var Gaus_transform_tabulate_exp_5 = laguerre.TransformLaguerre(Functions.Gauss(3 * lambda_2, lambda_2), T, N);
+                    WriteToCsv(Gaus_transform_tabulate_exp_5, "transformedgausstabulated_5.csv");
+
+
                 }
                 else
                 {
@@ -332,5 +376,4 @@ namespace Laguerr
             }
         }
     }
-}
 }

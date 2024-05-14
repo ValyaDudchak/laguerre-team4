@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("laguerrc#")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1b258df68481be88140a58a43c18626bd5698893")]
 [assembly: System.Reflection.AssemblyProductAttribute("laguerrc#")]
 [assembly: System.Reflection.AssemblyTitleAttribute("laguerrc#")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

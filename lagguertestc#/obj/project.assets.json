@@ -5529,11 +5529,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Admin\\Desktop\\lagguertestc#\\lagguertestc#.csproj",
+      "projectUniqueName": "C:\\laguerre-team4\\lagguertestc#\\lagguertestc#.csproj",
       "projectName": "lagguertestc#",
-      "projectPath": "C:\\Users\\Admin\\Desktop\\lagguertestc#\\lagguertestc#.csproj",
+      "projectPath": "C:\\laguerre-team4\\lagguertestc#\\lagguertestc#.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Admin\\Desktop\\lagguertestc#\\obj\\",
+      "outputPath": "C:\\laguerre-team4\\lagguertestc#\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5550,8 +5550,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\Admin\\Desktop\\laguerrc#\\laguerrc#.csproj": {
-              "projectPath": "C:\\Users\\Admin\\Desktop\\laguerrc#\\laguerrc#.csproj"
+            "C:\\laguerre-team4\\laguerrc#\\laguerrc#.csproj": {
+              "projectPath": "C:\\laguerre-team4\\laguerrc#\\laguerrc#.csproj"
             }
           }
         }

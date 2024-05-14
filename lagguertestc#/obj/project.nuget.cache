@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "PXnM3I0NLl/9fvYrurHAuvPK8dNjC7JapNLBY99I3tTHCKkOagVWixPtuf/Qin6wjLQ1EjWtNItYaPdmhRbp+A==",
+  "dgSpecHash": "iAXH0uEgjEcIeKr/TEf/Cj9AB4OSr0OejG9ml00QoXsIwDLH4RUsa6btqZttnf0F1Q94f8Q9dchSd713SmgTsA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Admin\\Desktop\\lagguertestc#\\lagguertestc#.csproj",
+  "projectFilePath": "C:\\laguerre-team4\\lagguertestc#\\lagguertestc#.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\coverlet.collector\\6.0.0\\coverlet.collector.6.0.0.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.codecoverage\\17.8.0\\microsoft.codecoverage.17.8.0.nupkg.sha512",
