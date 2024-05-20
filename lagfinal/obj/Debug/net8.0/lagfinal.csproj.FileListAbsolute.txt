@@ -1,0 +1,14 @@
+C:\Users\Admin\Desktop\lagfinal\bin\Debug\net8.0\lagfinal.exe
+C:\Users\Admin\Desktop\lagfinal\bin\Debug\net8.0\lagfinal.deps.json
+C:\Users\Admin\Desktop\lagfinal\bin\Debug\net8.0\lagfinal.runtimeconfig.json
+C:\Users\Admin\Desktop\lagfinal\bin\Debug\net8.0\lagfinal.dll
+C:\Users\Admin\Desktop\lagfinal\bin\Debug\net8.0\lagfinal.pdb
+C:\Users\Admin\Desktop\lagfinal\obj\Debug\net8.0\lagfinal.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\Desktop\lagfinal\obj\Debug\net8.0\lagfinal.AssemblyInfoInputs.cache
+C:\Users\Admin\Desktop\lagfinal\obj\Debug\net8.0\lagfinal.AssemblyInfo.cs
+C:\Users\Admin\Desktop\lagfinal\obj\Debug\net8.0\lagfinal.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Desktop\lagfinal\obj\Debug\net8.0\lagfinal.dll
+C:\Users\Admin\Desktop\lagfinal\obj\Debug\net8.0\refint\lagfinal.dll
+C:\Users\Admin\Desktop\lagfinal\obj\Debug\net8.0\lagfinal.pdb
+C:\Users\Admin\Desktop\lagfinal\obj\Debug\net8.0\lagfinal.genruntimeconfig.cache
+C:\Users\Admin\Desktop\lagfinal\obj\Debug\net8.0\ref\lagfinal.dll
