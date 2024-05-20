@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Admin\\Desktop\\lagfinal\\lagfinal.csproj": {}
+    "C:\\laguerre-team4\\lagfinal\\lagfinal.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Admin\\Desktop\\lagfinal\\lagfinal.csproj": {
+    "C:\\laguerre-team4\\lagfinal\\lagfinal.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\Desktop\\lagfinal\\lagfinal.csproj",
+        "projectUniqueName": "C:\\laguerre-team4\\lagfinal\\lagfinal.csproj",
         "projectName": "lagfinal",
-        "projectPath": "C:\\Users\\Admin\\Desktop\\lagfinal\\lagfinal.csproj",
+        "projectPath": "C:\\laguerre-team4\\lagfinal\\lagfinal.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\Desktop\\lagfinal\\obj\\",
+        "outputPath": "C:\\laguerre-team4\\lagfinal\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",

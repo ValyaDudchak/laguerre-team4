@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("lagfinal")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7152ab6086ca52c4b4714f04cbfb61f49c152887")]
 [assembly: System.Reflection.AssemblyProductAttribute("lagfinal")]
 [assembly: System.Reflection.AssemblyTitleAttribute("lagfinal")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

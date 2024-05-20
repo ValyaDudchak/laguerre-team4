@@ -265,6 +265,16 @@ namespace Laguerr
             else { return 0; }
         }
 
+        public static double F_v(double t)
+        {
+            return Math.Pow(t, 3) * Math.Cos(t);
+        }
+
+        public static double F_ma(double t)
+        {
+            return Math.Sin(2 * t) + 3 * t;
+        }
+
         public static Func<double, double> Gauss(double mu, double lambda)
         {
             if (lambda <= 0)
@@ -290,10 +300,10 @@ namespace Laguerr
 
             // Laguerre tab 
             var tabulateLaguerre = laguer.TabulateLaguerre(10, 2);
-            foreach (var tab in tabulateLaguerre)
-            {
-                Console.WriteLine(tab);
-            }
+            //foreach (var tab in tabulateLaguerre)
+            //{
+            //    Console.WriteLine(tab);
+            //}
             writeInFiles(tabulateLaguerre, @"LaguerreTab.csv");
 
             // Experiment
@@ -338,19 +348,24 @@ namespace Laguerr
             writeInFiles(reversedTransformGaussTab.Select(t => t.ToString()).ToList(), @"ReversedGaussTab.csv");
 
 
+            //gauss for mu=5
+            var transformGauss5 = laguer.TabulateTransform(Function.Gauss(5, 8), 20);
+            //foreach (var trans in transformGauss)
+            //{
+            //    Console.WriteLine(trans);
+            //}
+            writeInFiles(transformGauss5, @"transformGauss5.csv");
+
+
+            //Gauss
+            var reversedTransformGauss5 = laguer.ReversedTransformLaguerre(transformGauss5, Math.PI);
+            // Console.WriteLine($"Reversed Transform Gauss: {reversedTransformGauss}");
+            var reversedTransformGaussTab5 = laguer.ReversedLaguerreTransformationTabulate(transformGauss5, 0, Math.PI / 2);
+            writeInFiles(reversedTransformGaussTab5.Select(t => t.ToString()).ToList(), @"ReversedGaussTab5.csv");
 
 
 
-            //F_n
-            //var f_ntransform = laguer.TabulateTransform(Function.F_n, 20);
-            //writeInFiles(f_ntransform, "@f_ntransform.csv");
-
-
-            //var f_nreversed = laguer.ReversedTransformLaguerre(f_ntransform, Math.PI / 2);
-            //var f_nreversedtab = laguer.ReversedLaguerreTransformationTabulate(f_ntransform, 0,Math.PI/2);
-            //writeInFiles(f_nreversedtab, @"f_nreversedtab.csv");
-
-
+            
             var valuesToWrite = new Dictionary<string, double>
         {
             //{ "experimentResult", experimentResult?.Item2 ?? 0 },
