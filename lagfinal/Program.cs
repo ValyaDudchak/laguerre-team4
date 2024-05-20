@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.Intrinsics.X86;
 
 namespace Laguerr
 {
@@ -275,6 +276,10 @@ namespace Laguerr
             return Math.Sin(2 * t) + 3 * t;
         }
 
+        public static double F_r(double t)
+        {
+            return Math.Pow(t, 2) * Math.Sin(t);
+        }
         public static Func<double, double> Gauss(double mu, double lambda)
         {
             if (lambda <= 0)
@@ -364,8 +369,6 @@ namespace Laguerr
             writeInFiles(reversedTransformGaussTab5.Select(t => t.ToString()).ToList(), @"ReversedGaussTab5.csv");
 
 
-
-            
             var valuesToWrite = new Dictionary<string, double>
         {
             //{ "experimentResult", experimentResult?.Item2 ?? 0 },
